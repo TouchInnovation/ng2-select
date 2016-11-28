@@ -389,7 +389,7 @@ export class SelectComponent implements OnInit {
       return;
     }
     let target = e.target || e.srcElement;
-    if (target && target.value) {
+    if (target && target.value && e.type === 'keyup') {
       this.inputValue = target.value;
       this.behavior.filter(new RegExp(escapeRegexp(this.inputValue), 'ig'));
       this.doEvent('typed', this.inputValue);
@@ -492,7 +492,7 @@ export class SelectComponent implements OnInit {
     }, 0);
   }
 
-  private open():void {
+  public open():void {
     this.options = this.itemObjects
       .filter((option:SelectItem) => (this.multiple === false ||
       this.multiple === true && !this.active.find((o:SelectItem) => option.text === o.text)));
